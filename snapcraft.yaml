@@ -1,0 +1,27 @@
+name: rock-store-client
+base: core24
+version: '1.0.0'
+summary: CLI interfact to the Rock Store
+description: |
+  It's a simple unofficial console client. It support basic operations to inspect
+  Rock store content
+  - find rocks
+  - get detailed info about rocks
+  - download rock as OCI archive
+
+grade: devel
+confinement: strict
+
+parts:
+  rock-store-client:
+    plugin: go
+    source: .
+    build-snaps:
+      - go/1.23/stable
+
+
+apps:
+  rock-store-client:
+    command: bin/rock-store-client
+    plugs: [network, network-bind]
+
