@@ -11,6 +11,7 @@ import (
 const version = "0.0.1"
 
 var storeUrl string
+var skopeoBinaryName string
 var todoMessage = color.YellowString("TODO: implement me")
 
 func Execute() {
@@ -41,7 +42,7 @@ func Execute() {
 		Short:   "Download rock in oci-archive format via skopeo",
 		Args:    cobra.MinimumNArgs(2),
 		Example: "rock-store-client download postgresql 14/stable",
-		Run:     rock_info,
+		Run:     rock_download,
 	}
 
 	var rootCmd = &cobra.Command{Use: "rock-store-client"}
@@ -54,6 +55,12 @@ func Execute() {
 		"store-url",
 		"https://api.staging.snapcraft.io",
 		"Store URL, default api.snapcraft.io",
+	)
+	rootCmd.PersistentFlags().StringVar(
+		&skopeoBinaryName,
+		"skopeo-binary-name",
+		"rockcraft.skopeo",
+		"Skopeo utility name, default rockcraft.skopeo",
 	)
 
 	if err := rootCmd.Execute(); err != nil {
