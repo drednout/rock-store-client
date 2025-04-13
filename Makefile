@@ -1,0 +1,2 @@
+local-build:
+	go build
